@@ -75,6 +75,7 @@ size_t TODOS_Gen(TODOS *todos, char *path){
 
 						TODOS_Add(todos, match);
 						todo_in_file++;
+						line++;
                     			}
                 		}
             		}
