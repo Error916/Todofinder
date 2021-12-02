@@ -1,3 +1,15 @@
 # Todofinder
 
-Find and list all the Todos in the subdirectorys and give line position priotitizing the one whit more leading zeros
+A generic language todo finder that ranks the todos for priority llooking at the number of leadings O
+
+ES:
+
+TODOOOO => priority 4
+TODOO	=> priority 2
+
+## Quick Start
+
+```console
+$ make
+$ ./todofinder [path]
+```
