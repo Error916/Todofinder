@@ -32,8 +32,15 @@ void TODOS_Add(TODOS *todos, TODO_Frame *match){
 		todos->array = realloc(todos->array, todos->array_size * sizeof(TODO_Frame*));
 	}
 
-	todos->array[todos->pos] = match;
+	int i;
+	for(i = todos->pos; i >= 0; i--){
+		if( todos->array[i] == NULL || todos->array[i]->priority > match->priority) break;
+		todos->array[i+1] = todos->array[i];
+	}
+
+	todos->array[i] = match;
 	todos->pos++;
+
 }
 
 size_t TODOS_Gen(TODOS *todos, char *path){
