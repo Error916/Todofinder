@@ -34,7 +34,8 @@ void TODOS_Add(TODOS *todos, TODO_Frame *match){
 
 	int i;
 	for(i = todos->pos; i >= 0; i--){
-		if( todos->array[i] == NULL || todos->array[i]->priority > match->priority) break;
+		//FIXME: fix the fact that todos->array[i] is always null
+		if(todos->array[i] == NULL || todos->array[i]->priority > match->priority) break;
 		todos->array[i+1] = todos->array[i];
 	}
 
