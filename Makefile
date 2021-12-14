@@ -6,12 +6,12 @@ ifeq ($(PREFIX),)
 endif
 
 todofinder: $(SRC)
-        $(CC) $(CFLAGS) -o todofinder $(SRC) $(LIBS)
+	$(CC) $(CFLAGS) -o todofinder $(SRC) $(LIBS)
 
 install: todofinder
-        sudo install -d $(DESTDIR)$(PREFIX)/bin/ || su -c="install -d $(DESTDIR)$(PREFIX)/bin/"
-        sudo install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/ || su -c="install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/"
-        sudo chmod +x $(DESTDIR)$(PREFIX)/bin/todofinder
+	sudo install -d $(DESTDIR)$(PREFIX)/bin/ || su -c="install -d $(DESTDIR)$(PREFIX)/bin/"
+	sudo install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/ || su -c="install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/"
+	sudo chmod +x $(DESTDIR)$(PREFIX)/bin/todofinder
 
 clean:
-        rm todofinder
+	rm todofinder

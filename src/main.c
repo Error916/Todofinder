@@ -36,8 +36,9 @@ int main(int argc, char **argv){
 
 	recdir_close(recdir);
 
+	printf("| -> | line | %-20s | message\n", "file path");
 	for(size_t i = 0; i < todos->pos; ++i){
-		printf("%ld %ld %s %s", todos->array[i]->line, todos->array[i]->priority, todos->array[i]->path, todos->array[i]->message);
+		printf("| %-2ld | %-4ld | %-20s | %s", todos->array[i]->priority, todos->array[i]->line, todos->array[i]->path, todos->array[i]->message);
 	}
 
 	TODOS_Destroy(todos);
