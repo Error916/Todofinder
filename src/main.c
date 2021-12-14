@@ -12,7 +12,9 @@ int main(int argc, char **argv){
 	char* pathexe;
         if(argc == 2){
                 pathexe = argv[1];
-        } else {
+        } else if (argc == 1) {
+		pathexe = ".";
+	} else {
                 fprintf(stderr, "ERROR: use %s [path]\n", argv[0]);
                 exit(1);
         }
