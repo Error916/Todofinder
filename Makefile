@@ -11,6 +11,7 @@ todofinder: $(SRC)
 install: todofinder
         sudo install -d $(DESTDIR)$(PREFIX)/bin/ || su -c="install -d $(DESTDIR)$(PREFIX)/bin/"
         sudo install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/ || su -c="install -m 644 todofinder $(DESTDIR)$(PREFIX)/bin/"
+        sudo chmod +x $(DESTDIR)$(PREFIX)/bin/todofinder
 
 clean:
         rm todofinder
