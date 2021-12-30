@@ -57,7 +57,7 @@ size_t TODOS_Gen(TODOS *todos, const char *path, const char *string){
 
 		size_t i = 0;
 		while(i < sstring){
-			if(c != string[i]) break;
+			if(c != *(string + i)) break;
 			++i;
 			c = (char)fgetc(f);
 			if(i == sstring){
@@ -66,7 +66,7 @@ size_t TODOS_Gen(TODOS *todos, const char *path, const char *string){
 				char *mess = malloc(mess_size * sizeof(char));
 
 				size_t priority = 1;
-				while((char)fgetc(f) == string[sstring - 1]) ++priority;
+				while((char)fgetc(f) == *(string + sstring - 1)) ++priority;
 				fseek(f, -(sstring + priority), SEEK_CUR);
 				fgets(mess, mess_size * sizeof(char), f);
 
