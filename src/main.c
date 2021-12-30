@@ -21,12 +21,14 @@ int main(int argc, char **argv){
 	RECDIR *recdir = recdir_open(pathexe);
 
 	TODOS *todos = TODOS_Init();
+	TODOS *fixmes = TODOS_Init();
 
 	errno = 0;
 	struct dirent *ent = recdir_read(recdir);
 	while(ent){
 		char *path = join_path(recdir_top(recdir)->path, ent->d_name);
 		TODOS_Gen(todos, path, "TODO");
+		TODOS_Gen(fixmes, path, "FIXME");
 		free(path);
 		ent = recdir_read(recdir);
 	}
@@ -38,12 +40,24 @@ int main(int argc, char **argv){
 
 	recdir_close(recdir);
 
+	printf("+----+------+----------------------+\n");
 	printf("| -> | line | %-20s | message\n", "file path");
+	printf("+----+------+----------------------+\n");
+
 	for(size_t i = 0; i < todos->pos; ++i){
 		printf("| %-2ld | %-4ld | %-20s | %s", todos->array[i]->priority, todos->array[i]->line, todos->array[i]->path, todos->array[i]->message);
 	}
 
+	printf("+----+------+----------------------+\n");
+
+	for(size_t i = 0; i < fixmes->pos; ++i){
+		printf("| %-2ld | %-4ld | %-20s | %s", fixmes->array[i]->priority, fixmes->array[i]->line, fixmes->array[i]->path, fixmes->array[i]->message);
+	}
+
+	printf("+----+------+----------------------+\n");
+
 	TODOS_Destroy(todos);
+	TODOS_Destroy(fixmes);
 
 	return 0;
 }
