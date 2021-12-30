@@ -26,7 +26,7 @@ int main(int argc, char **argv){
 	struct dirent *ent = recdir_read(recdir);
 	while(ent){
 		char *path = join_path(recdir_top(recdir)->path, ent->d_name);
-		TODOS_Gen(todos, path);
+		TODOS_Gen(todos, path, "TODO");
 		free(path);
 		ent = recdir_read(recdir);
 	}
