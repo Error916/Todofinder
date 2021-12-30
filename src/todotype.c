@@ -81,6 +81,39 @@ size_t TODOS_Gen(TODOS *todos, char *path){
                 		}
             		}
         	}
+
+		if(c == 'F'){
+                	c = (char)fgetc(f);
+        		if(c == 'I'){
+                    		c = (char)fgetc(f);
+                		if(c == 'X'){
+                        		c = (char)fgetc(f);
+                    			if(c == 'M'){
+						c = (char)fgetc(f);
+						if(c == 'E'){
+							const size_t mess_size = 256;
+							char *mess = malloc(mess_size * sizeof(char));
+
+							size_t priority = 1;
+							while((char)fgetc(f) == 'E') priority++;
+							fseek(f, -(5 + priority), SEEK_CUR);
+							fgets(mess, mess_size * sizeof(char), f);
+
+							TODO_Frame *match = malloc(sizeof(TODO_Frame));
+                        				match->line = line + 1;
+							match->priority = priority;
+							match->path = strdup(path);
+							match->message = mess;
+
+							TODOS_Add(todos, match);
+							todo_in_file++;
+							line++;
+                    				}
+					}
+                		}
+            		}
+        	}
+
         } while(c != EOF);
 
 	fclose(f);
