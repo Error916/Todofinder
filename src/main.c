@@ -4,20 +4,36 @@
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
+#include <unistd.h>
+#include <pthread.h>
 
 #include "recdir.h"
 #include "todotype.h"
 
 int main(int argc, char **argv){
+	int s, opt;
+	ssize_t num_threads;
 	char* pathexe;
-        if(argc == 2){
-                pathexe = argv[1];
-        } else if (argc == 1) {
-		pathexe = ".";
-	} else {
-                fprintf(stderr, "ERROR: use %s [path]\n", argv[0]);
-                exit(1);
-        }
+
+	pathexe = ".";
+	num_threads = 4;
+
+	while ((opt = getopt(argc, argv, "p:t:")) != -1) {
+    		switch (opt) {
+    		case 't':
+        		num_threads = strtoul(optarg, NULL, 0);
+        		break;
+
+    		case 'p':
+        		pathexe = optarg;
+        		break;
+
+    		default:
+        		fprintf(stderr, "Usage: %s [-t num_threads] arg...\n", argv[0]);
+        		exit(EXIT_FAILURE);
+    		}
+	}
+
 	RECDIR *recdir = recdir_open(pathexe);
 
 	TODOS *todos = TODOS_Init();

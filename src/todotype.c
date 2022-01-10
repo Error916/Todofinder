@@ -4,6 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <errno.h>
+#include <pthread.h>
 
 #include "todotype.h"
 
@@ -41,7 +42,6 @@ void TODOS_Add(TODOS *todos, TODO_Frame *match){
 
 	todos->array[i] = match;
 	todos->pos++;
-
 }
 
 size_t TODOS_Gen(TODOS *todos, const char *path, const char *string){
