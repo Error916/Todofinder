@@ -1,5 +1,5 @@
-CFLAGS=-Wall -Wextra -std=c11 -pedantic -O3
-LIBS=
+CFLAGS= -g -Wall -Wextra -std=c11 -pedantic -O3 -march=native
+LIBS= -lpthread
 SRC= src/main.c src/recdir.c src/todotype.c
 ifeq ($(PREFIX),)
     PREFIX := /usr/local

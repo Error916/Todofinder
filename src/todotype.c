@@ -60,6 +60,7 @@ size_t TODOS_Gen(TODOS *todos, const char *path, const char *string){
 			if(c != *(string + i)) break;
 			++i;
 			c = (char)fgetc(f);
+			// FIXME: fix the fact that priority does not get updated
 			if(i == sstring){
 				ungetc(c ,f);
 				const size_t mess_size = 256;

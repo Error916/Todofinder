@@ -11,25 +11,19 @@
 #include "todotype.h"
 
 int main(int argc, char **argv){
-	int s, opt;
-	ssize_t num_threads;
+	int opt;
 	char* pathexe;
 
 	pathexe = ".";
-	num_threads = 4;
 
-	while ((opt = getopt(argc, argv, "p:t:")) != -1) {
+	while ((opt = getopt(argc, argv, "p:")) != -1) {
     		switch (opt) {
-    		case 't':
-        		num_threads = strtoul(optarg, NULL, 0);
-        		break;
-
     		case 'p':
         		pathexe = optarg;
         		break;
 
     		default:
-        		fprintf(stderr, "Usage: %s [-t num_threads] arg...\n", argv[0]);
+        		fprintf(stderr, "Usage: %s [-p path]\n", argv[0]);
         		exit(EXIT_FAILURE);
     		}
 	}
@@ -43,8 +37,8 @@ int main(int argc, char **argv){
 	struct dirent *ent = recdir_read(recdir);
 	while(ent){
 		char *path = join_path(recdir_top(recdir)->path, ent->d_name);
-		TODOS_Gen(todos, path, "TODO");
-		TODOS_Gen(fixmes, path, "FIXME");
+		TODOS_Gen(todos, path, "TODO:");
+		TODOS_Gen(fixmes, path, "FIXME:");
 		free(path);
 		ent = recdir_read(recdir);
 	}
@@ -61,13 +55,13 @@ int main(int argc, char **argv){
 	printf("+----+------+----------------------+\n");
 
 	for(size_t i = 0; i < todos->pos; ++i){
-		printf("| %-2ld | %-4ld | %-20s | %s", todos->array[i]->priority, todos->array[i]->line, todos->array[i]->path, todos->array[i]->message);
+		printf("| %-2lu | %-4lu | %-20s | %s", todos->array[i]->priority, todos->array[i]->line, todos->array[i]->path, todos->array[i]->message);
 	}
 
 	printf("+----+------+----------------------+\n");
 
 	for(size_t i = 0; i < fixmes->pos; ++i){
-		printf("| %-2ld | %-4ld | %-20s | %s", fixmes->array[i]->priority, fixmes->array[i]->line, fixmes->array[i]->path, fixmes->array[i]->message);
+		printf("| %-2lu | %-4lu | %-20s | %s", fixmes->array[i]->priority, fixmes->array[i]->line, fixmes->array[i]->path, fixmes->array[i]->message);
 	}
 
 	printf("+----+------+----------------------+\n");

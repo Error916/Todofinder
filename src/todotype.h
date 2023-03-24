@@ -19,6 +19,6 @@ typedef struct {
 TODOS *TODOS_Init(void);
 void TODOS_Destroy(TODOS *todos);
 void TODOS_Add(TODOS *todos, TODO_Frame *match);
-size_t TODOS_Gen(TODOS *todos, char *path);
+size_t TODOS_Gen(TODOS *todos, const char *path, const char *string);
 
 #endif //TODOTYPE_H_
